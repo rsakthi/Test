@@ -12,26 +12,15 @@ import com.tw.exception.InvalidTalkException;
 public class Talk{
 	
 	private String talkname;	
-	private int duration;
+	Duration duration;
+	
 	
 	/**
-	 * 
-	 */
-	public Talk() {
-		super();
-	}
-
-
-	/**
-	 * @throws InvalidTalkException 
 	 * @param talkname
 	 * @param duration
-	 * @throws  
 	 */
-	public Talk(String talkname, int duration) throws InvalidTalkException  {
-		if(talkname.isEmpty() || duration <= 0){
-			throw new InvalidTalkException();
-		}
+	public Talk(String talkname, Duration duration) {
+		super();
 		this.talkname = talkname;
 		this.duration = duration;
 	}
@@ -53,15 +42,58 @@ public class Talk{
 	/**
 	 * @return the duration
 	 */
-	public int getDuration() {
+	public Duration getDuration() {
 		return duration;
 	}
 
 	/**
 	 * @param duration the duration to set
 	 */
-	public void setDuration(int duration) {
+	public void setDuration(Duration duration) {
 		this.duration = duration;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((duration == null) ? 0 : duration.hashCode());
+		result = prime * result
+				+ ((talkname == null) ? 0 : talkname.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		
+		System.out.println(duration.getTalkDuration());
+		Talk other = (Talk) obj;
+		System.out.println(other.duration.getTalkDuration());
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Talk))
+			return false;
+		//Talk other = (Talk) obj;
+		if (duration == null) {
+			if (other.duration != null)
+				return false;
+		} else if (duration.getTalkDuration() != (other.duration.getTalkDuration()))
+			return false;
+		if (talkname == null) {
+			if (other.talkname != null)
+				return false;
+		} else if (!talkname.equals(other.talkname))
+			return false;
+		return true;
 	}	
 	
 }
